@@ -56,7 +56,7 @@ const updateStats = () => {
     const progressBar = document.getElementById('progress');
     progressBar.style.width = `${progress}%`
 
-    if(completedTasks == totalTasks) {
+    if(completedTasks == totalTasks && totalTasks>0) {
         blastConfetti();
     }
 
