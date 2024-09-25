@@ -2,38 +2,46 @@ const mongoose = require("mongoose");
 
 const connectDb = async () => {
   mongoose
-    .connect(
-      "mongodb+srv://salunkeyash:VFEzGCIdXfLlzlLA@cluster0.wkwc3kw.mongodb.net/week-7"
-    )
+    .connect("")
     .then(() => console.log("connected to db"))
     .catch((err) => console.log("err", err));
 };
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+    },
+    email: {
+      type: String,
+      unique: true,
+    },
+    password: {
+      type: String,
+    },
   },
-  email: {
-    type: String,
-    unique: true,
-  },
-  password: {
-    type: String,
-  },
-});
+  { timestamps: true }
+);
 
-const todoSchema = new mongoose.Schema({
-  title: {
-    type: String,
+const todoSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    isCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
   },
-  description: {
-    type: String,
-  },
-  isCompleted: {
-    type: Boolean,
-    default: false,
-  },
-});
+  { timestamps: true }
+);
 
 const User = mongoose.model("users", userSchema);
 const Todo = mongoose.model("todos", todoSchema);
