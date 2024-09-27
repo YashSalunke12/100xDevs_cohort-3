@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-
+const bcrypt = require("bcrypt");
 const adminSchema = new Schema(
   {
     firstName: {
@@ -22,6 +22,17 @@ const adminSchema = new Schema(
   },
   { timestamps: true }
 );
+
+adminSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  try {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+    next();
+  } catch (err) {
+    console.log("something went wrong while hashing the password");
+  }
+});
 
 const AdminModel = model("admins", adminSchema);
 

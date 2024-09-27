@@ -31,7 +31,7 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, saltRounds);
     next();
   } catch (err) {
-    return res.json({ msg: "error while hashing password" });
+    console.log("something went wrong while hashing the password");
   }
 });
 

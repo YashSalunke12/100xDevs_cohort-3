@@ -12,7 +12,15 @@ const userSigninSchema = z.object({
   password: z.string().min(5),
 });
 
+const courseSchema = z.object({
+  title: z.string(),
+  description: z.string().max(50),
+  price: z.number(),
+  imageUrl: z.string(),
+});
+
 module.exports = {
   userSignupSchema,
   userSigninSchema,
+  courseSchema,
 };
