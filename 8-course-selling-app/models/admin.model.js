@@ -19,6 +19,12 @@ const adminSchema = new Schema(
       type: String,
       required: true,
     },
+    courses: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "courses",
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -1,5 +1,5 @@
-const { Router, application } = require("express");
 const bcrypt = require("bcrypt");
+const { Router } = require("express");
 const {
   userSignupSchema,
   userSigninSchema,

@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 const express = require("express");
 const appRouter = require("./routes/index.routes");
 const connectDb = require("./db/db");

@@ -1,4 +1,4 @@
-const { Router, application } = require("express");
+const { Router } = require("express");
 const AdminModel = require("../models/admin.model");
 const bcrypt = require("bcrypt");
 const {
@@ -89,7 +89,10 @@ adminRouter.post(
         imageUrl,
         creatorId: adminId,
       });
-      res.json({ msg: "course created successfully", courseId: newCourse._id });
+      const admin = res.json({
+        msg: "course created successfully",
+        courseId: newCourse._id,
+      });
     } catch (err) {
       console.log("err while creating a course", err);
       res.json({ msg: "error while creating a coure " });
@@ -97,11 +100,10 @@ adminRouter.post(
   }
 );
 
-adminRouter.put(
-  "/course",
-  auth(process.env.JWT_ADMIN_SECRET),
-  (req, res) => {}
-);
+adminRouter.put("/course", auth(process.env.JWT_ADMIN_SECRET), (req, res) => {
+  const userId = req.id;
+  const { username, password } = req.body;
+});
 
 adminRouter.get(
   "/courses",
